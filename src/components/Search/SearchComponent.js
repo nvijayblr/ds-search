@@ -1,7 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint no-underscore-dangle: [1, { "allow": ["__env"] }] */
 import React, { Component, Fragment } from "react";
-import { Row, Col, Input, Icon, message, Select, AutoComplete } from "antd";
+import {
+  Row,
+  Col,
+  Input,
+  Icon,
+  message,
+  Select,
+  AutoComplete,
+  Pagination,
+} from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
 
@@ -39,6 +48,10 @@ class SearchComponent extends Component {
       resentSearch: [],
       suggessions: [],
     },
+    totalItems: 1,
+    page: 1,
+    pageSize: 10,
+    currentPage: 1,
   };
 
   tableWrapperRef = React.createRef();
@@ -79,8 +92,16 @@ class SearchComponent extends Component {
     });
   };
 
+  onPaginationChange = (page, pageSize) => {
+    const { dispatch } = this.context;
+    console.log(page, pageSize);
+    this.setState({ page, pageSize }, () => {
+      this.getSearchResults(dispatch);
+    });
+  };
+
   getSearchResults = async (dispatch) => {
-    const { searchValue, serachOption } = this.state;
+    const { searchValue, serachOption, page, pageSize } = this.state;
     const { autoCompleteDataSource } = this.state;
 
     this.handleWindowResize();
@@ -105,9 +126,16 @@ class SearchComponent extends Component {
       isLoading: true,
     });
     try {
-      const res = await getSearchRequest(searchValue, serachOption, {
-        cancelToken: this.signal.token,
-      });
+      const res = await getSearchRequest(
+        searchValue,
+        {
+          page,
+          pageSize,
+        },
+        {
+          cancelToken: this.signal.token,
+        }
+      );
 
       if (this.lastSession !== currentSession) return;
 
@@ -120,7 +148,7 @@ class SearchComponent extends Component {
 
   onGetSearchSuccess = (dispatch, res) => {
     this.parseTableData(res.data ? res.data : []);
-    this.setState({ isLoading: false });
+    this.setState({ isLoading: false, totalItems: 11415, currentPage: 1 });
     dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: false });
   };
 
@@ -141,7 +169,7 @@ class SearchComponent extends Component {
   };
 
   setTableDimensions = () => {
-    const marginBottom = 24;
+    const marginBottom = 70;
     const offsetTop = this.tableWrapperRef.current.getBoundingClientRect().top;
     const tableHeight = window.innerHeight - offsetTop - marginBottom;
 
@@ -200,6 +228,8 @@ class SearchComponent extends Component {
       showResultsTable,
       context,
       isLoading,
+      totalItems,
+      currentPage,
     } = this.state;
 
     return (
@@ -266,8 +296,19 @@ class SearchComponent extends Component {
                 enableSorting={false}
                 floatingFilter={false}
                 suppressMenu={false}
+                pagination={false}
               />
             )}
+            <div className="pagination-wrapper">
+              <Pagination
+                defaultCurrent={currentPage}
+                total={totalItems}
+                hideOnSinglePage={true}
+                showSizeChanger
+                onShowSizeChange={this.onPaginationChange}
+                onChange={this.onPaginationChange}
+              />
+            </div>
           </div>
         </div>
       </Fragment>

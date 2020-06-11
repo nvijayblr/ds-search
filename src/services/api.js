@@ -11,4 +11,7 @@ axios.interceptors.request.use(
 );
 
 export const getSearchRequest = (query, option, signal) =>
-  axios.get(`${searchApi}${query}`, signal);
+  axios.get(
+    `${searchApi}${query}&page=${option.page}&pagesize=${option.pageSize}`,
+    signal
+  );
