@@ -340,6 +340,7 @@ class SearchComponent extends Component {
                 tableHeight={tableHeight}
                 totalItems={totalItems}
                 page={page}
+                isLoading={isLoading}
                 onTableChange={this.handleTableChange}
               />
             )}

@@ -74,7 +74,14 @@ class DataTable extends Component {
   };
 
   render() {
-    const { rowData, colDefs, totalItems, tableHeight, page } = this.props;
+    const {
+      rowData,
+      colDefs,
+      totalItems,
+      tableHeight,
+      page,
+      isLoading,
+    } = this.props;
 
     return (
       <div className="data-table-wrapper">
@@ -83,6 +90,7 @@ class DataTable extends Component {
           components={this.components}
           dataSource={rowData}
           columns={colDefs}
+          loading={isLoading}
           onChange={this.handleTableChange}
           pagination={{
             total: totalItems,
@@ -96,7 +104,9 @@ class DataTable extends Component {
   }
 }
 
-DataTable.defaultProps = {};
+DataTable.defaultProps = {
+  isLoading: true,
+};
 
 DataTable.propTypes = {
   colDefs: PropTypes.array.isRequired,
@@ -104,6 +114,7 @@ DataTable.propTypes = {
   totalItems: PropTypes.number,
   page: PropTypes.number,
   tableHeight: PropTypes.number,
+  isLoading: PropTypes.bool,
 };
 
 export default DataTable;
