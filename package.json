@@ -21,6 +21,7 @@
     "react-dom": "^16.6.3",
     "react-json-tree": "github:jeremypeters/react-json-tree",
     "react-load-script": "0.0.6",
+    "react-resizable": "^1.10.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },

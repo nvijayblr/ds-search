@@ -1,20 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint no-underscore-dangle: [1, { "allow": ["__env"] }] */
 import React, { Component, Fragment } from "react";
-import {
-  Row,
-  Col,
-  Input,
-  Icon,
-  message,
-  Select,
-  AutoComplete,
-  Pagination,
-} from "antd";
+import { Row, Col, Input, Icon, Select, AutoComplete } from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
 
-import { Context } from "../../context";
 import { getSearchRequest } from "../../services/api";
 import DataTable from "../Datatable/DataTable";
 
@@ -24,8 +14,6 @@ const { Option } = Select;
 const { OptGroup } = AutoComplete;
 
 class SearchComponent extends Component {
-  static contextType = Context;
-
   signal = axios.CancelToken.source();
 
   defaultColumnDefs = {
@@ -38,7 +26,7 @@ class SearchComponent extends Component {
     serachOptions: [{ Title: "Default", value: "default" }],
     serachOption: "default",
     searchResults: [],
-    searchFields: [],
+    searchColumns: [],
     searchView: "table",
     showResultsTable: false,
     isLoading: false,
@@ -48,23 +36,27 @@ class SearchComponent extends Component {
       resentSearch: [],
       suggessions: [],
     },
-    totalItems: 1,
+    totalItems: 0,
     page: 1,
     pageSize: 10,
-    currentPage: 1,
+    sortingKey: "",
+    sortOrder: "",
+    reqTime: 0,
   };
 
   tableWrapperRef = React.createRef();
 
-  debouncedOnChange = debounce((dispatch) => {
-    this.getSearchResults(dispatch);
+  debouncedOnChange = debounce(() => {
+    this.setState({
+      page: 1,
+      sortingKey: "",
+    });
+
+    this.getSearchResults();
   }, 500);
 
   componentWillMount() {
-    const { dispatch } = this.context;
     window.addEventListener("resize", this.handleWindowResize);
-    dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: false });
-    dispatch({ type: "SHOW_RESULTS_TABLE", payload: false });
     this.setState({
       autoCompleteDataSource: {
         resentSearch: [],
@@ -78,7 +70,7 @@ class SearchComponent extends Component {
     window.removeEventListener("resize", this.handleWindowResize);
   }
 
-  onChange = (dispatch, e) => {
+  onChange = (e) => {
     // const { value } = e.target;
     const { autoCompleteDataSource } = this.state;
     this.setState({
@@ -88,31 +80,50 @@ class SearchComponent extends Component {
       },
     });
     this.setState({ searchValue: e }, () => {
-      this.debouncedOnChange(dispatch);
+      this.debouncedOnChange();
     });
   };
 
-  onPaginationChange = (page, pageSize) => {
-    const { dispatch } = this.context;
-    console.log(page, pageSize);
-    this.setState({ page, pageSize }, () => {
-      this.getSearchResults(dispatch);
-    });
+  handleTableChange = (pagination, filters, sorter) => {
+    // console.log("handleTableChange....", pagination, filters, sorter);
+    this.setState(
+      {
+        page: pagination.current,
+        pageSize: pagination.pageSize,
+        sortingKey: sorter.columnKey,
+        sortOrder: sorter.order,
+      },
+      () => {
+        this.getSearchResults();
+      }
+    );
   };
 
-  getSearchResults = async (dispatch) => {
-    const { searchValue, serachOption, page, pageSize } = this.state;
+  getReuestTimer = (reqStartTime) => {
+    let now = Date.now();
+    let seconds = Math.floor((now - reqStartTime) / 1000);
+    let milliseconds = Math.floor((now - reqStartTime) % 1000);
+    this.setState({ reqTime: `${seconds}.${milliseconds} seconds` });
+  };
+
+  getSearchResults = async () => {
+    const {
+      searchValue,
+      serachOption,
+      page,
+      pageSize,
+      sortingKey,
+      sortOrder,
+    } = this.state;
     const { autoCompleteDataSource } = this.state;
 
     this.handleWindowResize();
 
     const currentSession = {};
     this.lastSession = currentSession;
-    dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: true });
 
     if (!searchValue) {
-      dispatch({ type: "SET_SEARCH_RESULTS", payload: [] });
-      dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: false });
+      this.onSearchEmpty();
       return;
     }
     this.setState({
@@ -126,11 +137,20 @@ class SearchComponent extends Component {
       isLoading: true,
     });
     try {
+      let sort = "";
+      if (sortOrder === "ascend") {
+        sort = `&sortby=${sortingKey}`;
+      }
+      if (sortOrder === "descend") {
+        sort = `&sortby=-${sortingKey}`;
+      }
+      let reqStartTime = Date.now();
       const res = await getSearchRequest(
         searchValue,
         {
           page,
           pageSize,
+          sorting: sortingKey ? sort : "",
         },
         {
           cancelToken: this.signal.token,
@@ -138,41 +158,66 @@ class SearchComponent extends Component {
       );
 
       if (this.lastSession !== currentSession) return;
-
-      this.onGetSearchSuccess(dispatch, res);
+      this.getReuestTimer(reqStartTime);
+      this.onGetSearchSuccess(res);
     } catch (e) {
-      console.log(e);
-      this.onGetSearchError(dispatch);
+      this.onSearchEmpty();
     }
   };
 
-  onGetSearchSuccess = (dispatch, res) => {
+  onGetSearchSuccess = (res) => {
     this.parseTableData(res.data ? res.data : []);
-    this.setState({ isLoading: false, totalItems: 11415, currentPage: 1 });
-    dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: false });
+    this.setState({
+      isLoading: false,
+      totalItems: res.headers["total-items"]
+        ? res.headers["total-items"]
+        : 1000,
+    });
   };
 
   parseTableData = (data) => {
     const { meta } = data;
+    const colDefs = data.meta.fields.map((col) => {
+      return {
+        title: col.label,
+        dataIndex: col.name,
+        key: col.name,
+        sorter: true,
+      };
+    });
+
+    const rowData = data.data.map((data, index) => {
+      return {
+        ...data,
+        key: index,
+      };
+    });
+
     this.setState({
-      searchResults: data.data,
-      searchFields: data.meta.fields,
+      searchResults: rowData,
+      searchColumns: colDefs,
       searchView: meta.view,
       showResultsTable: true,
     });
   };
 
-  onGetSearchError = (dispatch) => {
-    message.error("Unfortunately there was an error getting the results");
-    this.setState({ isLoading: false });
-    dispatch({ type: "SHOW_TABLE_LOADING_OVERLAY", payload: false });
+  onSearchEmpty = () => {
+    // message.error("Unfortunately there was an error getting the results");
+    this.setState({
+      searchResults: [],
+      searchColumns: [],
+      searchView: "table",
+      showResultsTable: true,
+      isLoading: false,
+      page: 0,
+      totalItems: 0,
+    });
   };
 
   setTableDimensions = () => {
     const marginBottom = 70;
     const offsetTop = this.tableWrapperRef.current.getBoundingClientRect().top;
-    const tableHeight = window.innerHeight - offsetTop - marginBottom;
-
+    const tableHeight = window.innerHeight - offsetTop - marginBottom - 50;
     this.setState({ tableHeight });
   };
 
@@ -216,20 +261,19 @@ class SearchComponent extends Component {
   };
 
   render() {
-    const { dispatch } = this.context;
     const {
+      searchValue,
+      isLoading,
+      reqTime,
       serachOptions,
       serachOption,
       searchResults,
-      searchFields,
+      searchColumns,
       tableHeight,
-      hiddenColumns,
       searchView,
       showResultsTable,
-      context,
-      isLoading,
       totalItems,
-      currentPage,
+      page,
     } = this.state;
 
     return (
@@ -259,7 +303,7 @@ class SearchComponent extends Component {
                   dropdownStyle={{ width: "500px" }}
                   onSearch={this.handleSearch}
                   optionLabelProp="text"
-                  onChange={(e) => this.onChange(dispatch, e)}
+                  onChange={(e) => this.onChange(e)}
                   ref={(node) => {
                     this.searchInput = node;
                   }}
@@ -276,6 +320,12 @@ class SearchComponent extends Component {
                     size="large"
                   />
                 </AutoComplete>
+                {totalItems && searchValue && !isLoading && (
+                  <div className="search-info">
+                    About {parseInt(totalItems).toLocaleString()} results (
+                    {reqTime})
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
@@ -285,30 +335,14 @@ class SearchComponent extends Component {
           <div ref={this.tableWrapperRef} className="search-results">
             {searchView === "table" && showResultsTable && (
               <DataTable
-                ref={this.dataTableRef}
-                columns={searchFields}
+                colDefs={searchColumns}
                 rowData={searchResults}
                 tableHeight={tableHeight}
-                hiddenColumns={hiddenColumns}
-                context={context}
-                tableResultsAreLoading={isLoading}
-                enableFilter={false}
-                enableSorting={false}
-                floatingFilter={false}
-                suppressMenu={false}
-                pagination={false}
+                totalItems={totalItems}
+                page={page}
+                onTableChange={this.handleTableChange}
               />
             )}
-            <div className="pagination-wrapper">
-              <Pagination
-                defaultCurrent={currentPage}
-                total={totalItems}
-                hideOnSinglePage={true}
-                showSizeChanger
-                onShowSizeChange={this.onPaginationChange}
-                onChange={this.onPaginationChange}
-              />
-            </div>
           </div>
         </div>
       </Fragment>

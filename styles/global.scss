@@ -18,47 +18,8 @@
   height: 100%;
 }
 
-.pagination-wrapper {
-  margin-top: 10px;
-  text-align: right;
-  .ant-pagination-prev .ant-pagination-item-link,
-  .ant-pagination-next .ant-pagination-item-link {
-    background-color: #191919;
-    border: 1px solid #434343;
-    color: #fff;
-    border-radius: 0;
-  }
-  .ant-pagination-item {
-    background-color: #191919;
-    border: 1px solid #434343;
-    color: #fff;
-    border-radius: 0;
-    a {
-      color: rgba(247, 247, 247, 0.62);
-    }
-  }
-  .ant-pagination-item-active {
-    a {
-      color: #fff;
-    }
-  }
-  .ant-pagination-disabled {
-    opacity: 0.6;
-  }
-  .ant-pagination-jump-prev
-    .ant-pagination-item-container
-    .ant-pagination-item-ellipsis,
-  .ant-pagination-jump-next
-    .ant-pagination-item-container
-    .ant-pagination-item-ellipsis {
-    color: rgba(247, 247, 247, 0.62);
-  }
-  .ant-pagination-jump-prev
-    .ant-pagination-item-container
-    .ant-pagination-item-link-icon,
-  .ant-pagination-jump-next
-    .ant-pagination-item-container
-    .ant-pagination-item-link-icon {
-    color: rgba(247, 247, 247, 0.62);
-  }
+.search-info {
+  color: rgba(255, 255, 255, 0.62);
+  padding-top: 4px;
+  font-size: 12px;
 }
