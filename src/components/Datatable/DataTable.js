@@ -97,7 +97,11 @@ class DataTable extends Component {
             current: page,
             showSizeChanger: true,
           }}
-          scroll={{ y: tableHeight }}
+          scroll={{
+            x: false, // If specify the width, the header and body will be scrollable
+            y: tableHeight,
+            scrollToFirstRowOnChange: true,
+          }}
         />
       </div>
     );
