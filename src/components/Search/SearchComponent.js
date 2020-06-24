@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint no-underscore-dangle: [1, { "allow": ["__env"] }] */
 import React, { Component, Fragment } from "react";
-import { Row, Col, Input, Icon, Select, AutoComplete } from "antd";
+import { Row, Col, Input, Icon, Select, AutoComplete, Button } from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
 
 import { getSearchRequest } from "../../services/api";
-import DataTable from "../Datatable/DataTable";
+import AntDataTable from "../Datatable/AntDataTable";
 
 import "./SearchComponent.scss";
 
@@ -22,7 +22,6 @@ class SearchComponent extends Component {
 
   state = {
     tableHeight: 500,
-    hiddenColumns: [],
     serachOptions: [{ Title: "Default", value: "default" }],
     serachOption: "default",
     searchResults: [],
@@ -31,7 +30,6 @@ class SearchComponent extends Component {
     showResultsTable: false,
     isLoading: false,
     searchValue: "",
-    context: { componentParent: this },
     autoCompleteDataSource: {
       resentSearch: [],
       suggessions: [],
@@ -85,7 +83,7 @@ class SearchComponent extends Component {
   };
 
   handleTableChange = (pagination, filters, sorter) => {
-    // console.log("handleTableChange....", pagination, filters, sorter);
+    console.log("handleTableChange....", pagination, filters, sorter);
     this.setState(
       {
         page: pagination.current,
@@ -100,9 +98,9 @@ class SearchComponent extends Component {
   };
 
   getReuestTimer = (reqStartTime) => {
-    let now = Date.now();
-    let seconds = Math.floor((now - reqStartTime) / 1000);
-    let milliseconds = Math.floor((now - reqStartTime) % 1000);
+    const now = Date.now();
+    const seconds = Math.floor((now - reqStartTime) / 1000);
+    const milliseconds = Math.floor((now - reqStartTime) % 1000);
     this.setState({ reqTime: `${seconds}.${milliseconds} seconds` });
   };
 
@@ -144,7 +142,7 @@ class SearchComponent extends Component {
       if (sortOrder === "descend") {
         sort = `&sortby=-${sortingKey}`;
       }
-      let reqStartTime = Date.now();
+      const reqStartTime = Date.now();
       const res = await getSearchRequest(
         searchValue,
         {
@@ -175,6 +173,55 @@ class SearchComponent extends Component {
     });
   };
 
+  handleFilter = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+  };
+
+  handleReset = (clearFilters) => {
+    clearFilters();
+  };
+
+  getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={(node) => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() =>
+            this.handleFilter(selectedKeys, confirm, dataIndex)
+          }
+          style={{ width: 188, marginBottom: 8, display: "block" }}
+        />
+        <Button
+          onClick={() => this.handleReset(clearFilters)}
+          size="small"
+          style={{ width: 90 }}
+        >
+          Reset
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => this.handleFilter(selectedKeys, confirm, dataIndex)}
+          size="small"
+          style={{ width: 90 }}
+        >
+          Apply
+        </Button>
+      </div>
+    ),
+  });
+
   parseTableData = (data) => {
     const { meta } = data;
     const colDefs = data.meta.fields.map((col) => {
@@ -183,12 +230,13 @@ class SearchComponent extends Component {
         dataIndex: col.name,
         key: col.name,
         sorter: true,
+        // ...this.getColumnSearchProps(col.name)
       };
     });
 
-    const rowData = data.data.map((data, index) => {
+    const rowData = data.data.map((d, index) => {
       return {
-        ...data,
+        ...d,
         key: index,
       };
     });
@@ -334,7 +382,7 @@ class SearchComponent extends Component {
         <div className="search-table-wrapper">
           <div ref={this.tableWrapperRef} className="search-results">
             {searchView === "table" && showResultsTable && (
-              <DataTable
+              <AntDataTable
                 colDefs={searchColumns}
                 rowData={searchResults}
                 tableHeight={tableHeight}
