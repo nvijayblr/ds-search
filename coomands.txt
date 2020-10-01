@@ -1,6 +1,0 @@
-./lambda_db
-
-/usr/local/go/bin/go build
-
-
-

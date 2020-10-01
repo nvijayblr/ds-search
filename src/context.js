@@ -1,24 +1,34 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export const Context = React.createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_SEARCH_RESULTS":
+    case 'SET_DEVICES':
       return {
         ...state,
-        results: action.payload,
+        devices: action.payload
       };
-    case "SHOW_TABLE_LOADING_OVERLAY":
+    case 'SHOW_TABLE_LOADING_OVERLAY':
       return {
         ...state,
-        tableResultsAreLoading: action.payload,
+        tableResultsAreLoading: action.payload
       };
-    case "SHOW_RESULTS_TABLE":
+    case 'SHOW_RESULTS_TABLE':
       return {
         ...state,
-        showResultsTable: action.payload,
+        showResultsTable: action.payload
+      };
+    case 'SET_COUNTRIES':
+      return {
+        ...state,
+        countryList: action.payload
+      };
+    case 'SET_CREDENTIALS':
+      return {
+        ...state,
+        credentialsList: action.payload
       };
     default:
       return state;
@@ -27,10 +37,12 @@ const reducer = (state, action) => {
 
 export class Provider extends Component {
   state = {
-    results: [],
+    devices: [],
+    countryList: [],
+    credentialsList: [],
     tableResultsAreLoading: false,
     showResultsTable: false,
-    dispatch: (action) => this.setState((state) => reducer(state, action)),
+    dispatch: action => this.setState(state => reducer(state, action))
   };
 
   render() {
@@ -42,7 +54,7 @@ export class Provider extends Component {
 }
 
 Provider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export const Consumer = Context.Consumer; // eslint-disable-line prefer-destructuring

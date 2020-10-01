@@ -1,0 +1,114 @@
+$break-xxs: 320px;
+$break-xs: 420px;
+$break-sm: 680px;
+$break-md: 812px;
+$break-lg: 1024px;
+
+@media screen and (max-width: $break-lg) {
+  .reports {
+    .form-control {
+      margin-bottom: 10px;
+    }
+    .reports-body {
+      top: 140px;
+    }
+  }
+}
+
+@media screen and (max-width: $break-md) {
+  .global-header {
+    .ant-menu.ant-menu-horizontal {
+      min-width: auto;
+      width: 350px;
+      display: none;
+    }
+    .mobile-nav {
+      display: block;
+      .mobile-user-menu {
+        display: block;
+      }
+    }
+    .user-menu {
+      display: none;
+    }
+  }
+  .search-input-wrapper {
+    left: 20px;
+    right: 20px;
+  }
+  .policies {
+    .form-control {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .ant-tabs {
+      top: 240px;
+    }
+  }
+  .reports {
+    .reports-body {
+      top: 170px;
+    }
+  }
+  .atlwdg-popup {
+    width: 95% !important;
+  }
+  .admin-modal.ant-modal {
+    min-width: auto;
+  }
+}
+
+@media screen and (max-width: $break-sm) {
+  .global-header {
+    .ant-menu.ant-menu-horizontal {
+      min-width: auto;
+      width: 150px;
+    }
+  }
+  .reports {
+    .form-control {
+      width: 100%;
+    }
+    .reports-body {
+      top: 330px;
+    }
+    .policy-btn-download span {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $break-xs) {
+  .global-header {
+    .ant-menu.ant-menu-horizontal {
+      min-width: auto;
+      width: 50px;
+    }
+  }
+  .user-menu .text {
+    display: inline;
+  }
+  .policies {
+    .policy-btn-download span {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $break-xxs) {
+  .user-menu .text {
+    display: none;
+  }
+  .user-menu .ant-menu-sub .text {
+    display: inline;
+  }
+}
+
+@media screen and (min-width: $break-lg) {
+  .global-header {
+    .ant-menu.ant-menu-horizontal {
+      min-width: 600px;
+      width: auto;
+    }
+  }
+}

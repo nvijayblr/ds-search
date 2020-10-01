@@ -1,0 +1,96 @@
+.device-data {
+  .ingestion-date {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+    .ingestion-date-icon {
+      font-size: 25px;
+      margin-right: 10px;
+      position: relative;
+      top: -1px;
+    }
+    .ingestion-date-select {
+      width: 320px;
+    }
+  }
+  .category-tabs {
+    position: absolute;
+    top: 20px;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    .ant-tabs-content {
+      position: absolute;
+      top: 40px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .ant-tabs-tabpane {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+  .sh-password {
+    span {
+      margin-right: 10px;
+    }
+    .anticon {
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  }
+}
+.ant-modal-content {
+  border: 2px solid #434343 !important;
+  border-radius: 4px !important;
+}
+.ant-modal-content,
+.ant-modal-header {
+  background-color: #000000 !important;
+  border-color: #545151 !important;
+}
+.ant-modal-title {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  background: #252524 !important;
+  border-color: #191919 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  background-color: #191919 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.category-tabs > .ant-tabs-content,
+.ant-tabs-bar {
+  border-color: #191919 !important;
+}
+.ant-tabs.ant-tabs-card .ant-tabs-card-content > .ant-tabs-tabpane {
+  background: #181818;
+}
+.ant-modal-close-x svg {
+  fill: rgba(255, 255, 255, 0.7) !important;
+}
+.ant-modal-mask {
+  background-color: rgba(76, 76, 76, 0.85) !important;
+}
+.ant-tabs-tabpane {
+  padding: 20px !important;
+  overflow-y: auto;
+}
+.ant-card-small > .ant-card-body,
+.ant-card.ant-card-bordered .ant-card-head {
+  border: 1px solid #434343;
+  .ant-row {
+    margin: 8px 0;
+  }
+}
+.ant-card-small.rounded-card > .ant-card-body {
+  border-radius: 5px !important;
+}

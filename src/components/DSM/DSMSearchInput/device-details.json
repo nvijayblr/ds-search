@@ -1,0 +1,248 @@
+{
+  "uuid": "d7bb558f-c1b1-475d-9f75-45163e82367c",
+  "metadata": {
+    "name": "atvie01a-fv022_atm10b",
+    "vendor": "Checkpoint-VSX-VM",
+    "os_version": "R77.30",
+    "country": "Liberty Global",
+    "ipv4_address": "172.28.43.19",
+    "ipv6_address": null,
+    "updated": "2020-04-17T01:14:36.710591Z"
+  },
+  "categories": [
+    {
+      "id": "arp",
+      "title": "Arp Table",
+      "data": {
+        "meta": {
+          "view": "table",
+          "fields": [
+            {
+              "label": "Protocol",
+              "name": "protocol",
+              "isShow": true
+            },
+            {
+              "label": "Interface",
+              "name": "interface",
+              "isShow": true
+            },
+            {
+              "label": "encap_type",
+              "name": "encap_type",
+              "isShow": true
+            },
+            {
+              "label": "ip_address",
+              "name": "ip_address",
+              "isShow": true
+            },
+            {
+              "label": "mac_address",
+              "name": "mac_address",
+              "isShow": true
+            },
+            {
+              "label": "interface_id",
+              "name": "interface_id",
+              "isShow": true
+            }
+          ]
+        },
+        "data": [
+          {
+            "protocol": null,
+            "interface": "bond1.383",
+            "encap_type": null,
+            "ip_address": "172.31.102.8",
+            "mac_address": "005056a0609c",
+            "interface_id": "b_1.383"
+          },
+          {
+            "protocol": null,
+            "interface": "bond1.385",
+            "encap_type": null,
+            "ip_address": "172.31.101.160",
+            "mac_address": "005056a03bab",
+            "interface_id": "b_1.385"
+          },
+          {
+            "protocol": null,
+            "interface": "bond1.795",
+            "encap_type": null,
+            "ip_address": "172.31.136.221",
+            "mac_address": "00005e00014f",
+            "interface_id": "b_1.795"
+          },
+          {
+            "protocol": null,
+            "interface": "bond1.384",
+            "encap_type": null,
+            "ip_address": "172.31.100.41",
+            "mac_address": "544810f59f4c",
+            "interface_id": "b_1.384"
+          },
+          {
+            "protocol": null,
+            "interface": "bond1.793",
+            "encap_type": null,
+            "ip_address": "172.31.136.133",
+            "mac_address": "005056a7223e",
+            "interface_id": "b_1.793"
+          },
+          {
+            "protocol": null,
+            "interface": "bond1.794",
+            "encap_type": null,
+            "ip_address": "172.31.136.165",
+            "mac_address": "005056a72265",
+            "interface_id": "b_1.794"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vlan",
+      "title": "VLAN Table",
+      "data": {
+        "meta": {
+          "view": "card",
+          "isShow": "false",
+          "fields": [
+            {
+              "label": "ports",
+              "name": "ports",
+              "isShow": true
+            },
+            {
+              "label": "status",
+              "name": "status",
+              "isShow": true
+            },
+            {
+              "label": "vlan_id",
+              "name": "vlan_id",
+              "isShow": true
+            },
+            {
+              "label": "vlan_name",
+              "name": "vlan_name",
+              "isShow": true
+            }
+          ]
+        },
+        "data": [
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "324",
+            "vlan_name": "324"
+          },
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "325",
+            "vlan_name": "325"
+          },
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "326",
+            "vlan_name": "326"
+          },
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "339",
+            "vlan_name": "339"
+          },
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "805",
+            "vlan_name": "805"
+          },
+          {
+            "ports": ["bond0"],
+            "status": null,
+            "vlan_id": "806",
+            "vlan_name": "806"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ip_route",
+      "title": "IP Route",
+      "data": {
+        "meta": {
+          "view": "list",
+          "fields": [
+            {
+              "label": "code",
+              "name": "code",
+              "isShow": true
+            },
+            {
+              "label": "genmask",
+              "name": "genmask",
+              "isShow": true
+            },
+            {
+              "label": "network",
+              "name": "network",
+              "isShow": true
+            },
+            {
+              "label": "next_hop",
+              "name": "next_hop",
+              "isShow": true
+            },
+            {
+              "label": "interface",
+              "name": "interface",
+              "isShow": true
+            }
+          ]
+        },
+        "data": [
+          {
+            "code": "UGD",
+            "genmask": "255.255.255.254",
+            "network": "195.34.130.110",
+            "next_hop": "172.22.36.1",
+            "interface": "bond0.324"
+          },
+          {
+            "code": "UGD",
+            "genmask": "255.255.255.254",
+            "network": "195.34.130.104",
+            "next_hop": "172.22.36.1",
+            "interface": "bond0.324"
+          },
+          {
+            "code": "UD",
+            "genmask": "255.255.255.252",
+            "network": "192.168.12.0",
+            "next_hop": "0.0.0.0",
+            "interface": "bond0.326"
+          },
+          {
+            "code": "UD",
+            "genmask": "255.255.255.248",
+            "network": "172.22.38.0",
+            "next_hop": "0.0.0.0",
+            "interface": "bond0.325"
+          },
+          {
+            "code": "UGD",
+            "genmask": "255.255.255.248",
+            "network": "217.23.240.0",
+            "next_hop": "213.47.218.97",
+            "interface": "bond0.805"
+          }
+        ]
+      }
+    }
+  ]
+}

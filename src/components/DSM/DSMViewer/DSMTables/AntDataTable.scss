@@ -1,0 +1,337 @@
+// Ant-d Table and pagination related styles.
+
+.react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+.react-resizable-handle {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  bottom: 0;
+  right: -5px;
+  cursor: col-resize;
+  z-index: 1;
+}
+
+.data-table-wrapper {
+  .ant-table-thead > tr > th,
+  .ant-table-header {
+    word-break: break-all;
+    font-size: 13px;
+    // padding-top: 3px;
+    // padding-bottom: 7px;
+    &.value {
+      color: #000;
+    }
+  }
+  .ant-table-tbody > tr > td {
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    &.value {
+      color: #000;
+    }
+    .wrap-single-line {
+      height: 20px;
+      overflow: hidden;
+    }
+  }
+  .ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
+    position: relative;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 10px 5px;
+  }
+  .ant-table-thead > tr:first-child > th:first-child,
+  .ant-table-tbody > tr > td:first-child {
+    padding-left: 12px;
+  }
+}
+
+.ant-empty-description {
+  color: #fff;
+}
+.ant-spin-blur {
+  opacity: 0.32;
+}
+.ant-table-scroll table {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+.data-table-wrapper {
+  .ant-table-thead th {
+    .ant-table-header-column {
+      width: 100%;
+      .ant-table-column-sorters {
+        position: relative;
+        width: 100%;
+      }
+      .ant-table-column-sorter {
+        position: absolute;
+        top: 2px;
+        right: 0px;
+        width: 20px;
+      }
+      .ant-input {
+        font-size: 12px;
+        padding: 0px 7px;
+        margin-top: 5px;
+        height: 26px;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .ant-select {
+        width: 100%;
+        font-size: 11px;
+        margin-top: 3px;
+        .ant-select-selection {
+          height: 26px;
+          .ant-select-selection__rendered {
+            line-height: 22px;
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+          .ant-select-arrow {
+            font-size: 10px;
+          }
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-hd-wrp {
+  .ant-select-auto-complete {
+    width: 100% !important;
+    .ant-select-selection__rendered {
+      margin: 0 !important;
+    }
+  }
+}
+
+.dark-theme {
+  .data-table-wrapper {
+    .ant-table table {
+      color: rgba(255, 255, 255, 0.72);
+      background: #191919;
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-header {
+      background: #272727;
+      color: rgba(255, 255, 255, 0.72);
+      border-bottom: 1px solid #434343;
+      word-break: break-all;
+      font-size: 13px;
+      // padding-top: 3px;
+      // padding-bottom: 7px;
+      &.value {
+        color: #fff;
+      }
+    }
+    .ant-table-tbody > tr > td {
+      border-bottom: 1px solid #434343;
+      height: 40px;
+      overflow: hidden;
+      white-space: nowrap;
+      &.value {
+        color: #fff;
+      }
+      .wrap-single-line {
+        height: 20px;
+        overflow: hidden;
+      }
+    }
+    .ant-table-placeholder {
+      color: rgba(255, 255, 255, 0.72);
+      background: #191919;
+      border-color: #434343;
+    }
+    .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+      background: rgba(67, 67, 67, 0.6);
+    }
+    .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover,
+    .ant-table-thead > tr > th.ant-table-column-sort {
+      background: #404040;
+    }
+    .ant-table-thead
+      > tr
+      > th
+      .ant-table-column-sorter
+      .ant-table-column-sorter-inner
+      .ant-table-column-sorter-down.on,
+    .ant-table-thead
+      > tr
+      > th
+      .ant-table-column-sorter
+      .ant-table-column-sorter-inner
+      .ant-table-column-sorter-up.on {
+      color: #636363;
+    }
+    .ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
+      position: relative;
+      background: #5d5d5d;
+    }
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 10px 5px;
+    }
+    .ant-table-thead > tr:first-child > th:first-child,
+    .ant-table-tbody > tr > td:first-child {
+      padding-left: 12px;
+    }
+  }
+
+  .data-table-wrapper {
+    .ant-table-thead th {
+      .ant-table-header-column {
+        width: 100%;
+        .ant-table-column-sorters {
+          position: relative;
+          width: 100%;
+        }
+        .ant-table-column-sorter {
+          position: absolute;
+          top: 2px;
+          right: 0px;
+          width: 20px;
+        }
+        .ant-input {
+          font-size: 12px;
+          padding: 0px 7px;
+          margin-top: 5px;
+          height: 26px;
+          background: #191919;
+          border: 1px solid #6b6a6a;
+          color: #f1f1f1;
+          &:focus {
+            box-shadow: none;
+          }
+        }
+
+        .ant-select {
+          width: 100%;
+          font-size: 11px;
+          margin-top: 3px;
+          .ant-select-selection {
+            height: 26px;
+            background: #191919 !important;
+            border-color: #6b6a6a !important;
+            .ant-select-selection__rendered {
+              line-height: 22px;
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+            .ant-select-arrow {
+              font-size: 10px;
+            }
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ant-dropdown-menu-item {
+    .ant-checkbox-inner {
+      background-color: #404040;
+      border: 1px solid #8a8a8a;
+    }
+    &:hover,
+    &.ant-dropdown-menu-item-selected,
+    &.ant-dropdown-menu-item-active {
+      color: rgba(255, 255, 255, 0.85);
+      background-color: #313131 !important;
+    }
+    .ant-checkbox-checked .ant-checkbox-inner {
+      background-color: #323435;
+      border-color: #cbccce;
+    }
+  }
+
+  .table-filter-dropdown {
+    &.ant-select-dropdown {
+      font-size: 11px;
+      .ant-select-selection,
+      .ant-select-dropdown,
+      .ant-select-dropdown-menu-item-selected,
+      .ant-select-dropdown-menu-item-active {
+        background: #6b6969 !important;
+      }
+      .ant-select-dropdown-menu-item {
+        &:hover:not(.ant-select-dropdown-menu-item-disabled) {
+          background: #6b6969 !important;
+        }
+      }
+    }
+  }
+
+  .custom-hd-wrp {
+    // max-width: 200px;
+    .ant-select-selection .ant-select-selection-selected-value {
+      color: #b9b9b9 !important;
+    }
+    .ant-select-auto-complete {
+      width: 100% !important;
+      .ant-select-selection__rendered {
+        margin: 0 !important;
+      }
+    }
+  }
+
+  .ant-pagination {
+    margin-top: 10px;
+    text-align: right;
+    .ant-pagination-prev .ant-pagination-item-link,
+    .ant-pagination-next .ant-pagination-item-link {
+      background-color: #191919;
+      border: 1px solid #434343;
+      color: #fff;
+      border-radius: 0;
+    }
+    .ant-pagination-item {
+      background-color: #191919;
+      border: 1px solid #434343;
+      color: #fff;
+      border-radius: 0;
+      a {
+        color: rgba(247, 247, 247, 0.62);
+      }
+    }
+    .ant-pagination-item-active {
+      a {
+        color: #fff;
+        background: #434343;
+      }
+    }
+    .ant-pagination-disabled {
+      opacity: 0.6;
+    }
+    .ant-pagination-item:focus,
+    .ant-pagination-item:hover {
+      border-color: #434343;
+      a {
+        color: #fff;
+        background: #434343;
+      }
+    }
+    .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
+    .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+      color: rgba(247, 247, 247, 0.62);
+    }
+    .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon,
+    .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+      color: rgba(247, 247, 247, 0.62);
+    }
+  }
+}

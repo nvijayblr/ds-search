@@ -1,0 +1,373 @@
+// Light theme related styles
+.app-root,
+.global-layout {
+  min-height: 100vh !important;
+  height: auto !important;
+}
+
+.ant-select-dropdown-menu-item {
+  font-weight: 300;
+}
+
+.search-input-wrapper .search-input.ant-input-affix-wrapper .ant-input:not(:first-child) {
+  font-weight: 200;
+  letter-spacing: 1.2px;
+}
+
+.search-results {
+  position: relative;
+  top: 20px;
+}
+.search-select-options {
+  width: 100%;
+  .ant-select-selection--single {
+    height: auto !important;
+  }
+  .ant-select-selection__rendered {
+    line-height: 53px;
+    font-size: 20px;
+    font-weight: 200;
+    letter-spacing: 1px;
+  }
+}
+
+.initial-search-done {
+  .search-select-options {
+    .ant-select-selection--single {
+      height: auto !important;
+    }
+    .ant-select-selection__rendered {
+      line-height: 38px;
+      font-size: 16px;
+      font-weight: 200;
+      letter-spacing: 1px;
+    }
+  }
+}
+.search-input-wrapper {
+  transition: all 0.5s ease-out;
+  &.initial-search-done {
+    .anticon-search {
+      font-size: 18px;
+    }
+    .search-input {
+      height: 40px;
+      &.ant-input-affix-wrapper .ant-input:not(:first-child) {
+        padding-left: 35px;
+        font-size: 16px;
+      }
+      .ant-input-prefix {
+        left: 12px;
+      }
+      .anticon-search {
+        font-size: 18px;
+      }
+    }
+  }
+  .search-input {
+    height: 54px;
+    .ant-input-suffix {
+      cursor: pointer;
+    }
+    .anticon-search {
+      font-size: 22px;
+    }
+    &.ant-input-affix-wrapper .ant-input:not(:first-child) {
+      padding-left: 48px;
+      font-size: 22px;
+    }
+    .ant-input-prefix {
+      left: 17px;
+    }
+  }
+}
+
+.ant-input,
+.ant-select-selection--single {
+  border-radius: 0 !important;
+}
+
+.search-info {
+  font-size: 12px;
+  color: #000;
+  position: relative;
+  top: 11px;
+  text-align: right;
+  font-weight: 600;
+  transition: 0.25s ease;
+  .loading {
+    color: #000;
+    margin-right: 10px;
+  }
+  &.loading {
+    color: rgba(214, 214, 214, 0.32);
+    transition: 0.25s ease;
+  }
+}
+
+.column-filter-dropdown {
+  min-width: 220px;
+  max-width: 800px;
+  width: auto !important;
+}
+.top-option-box {
+  float: left;
+  width: 456px;
+}
+
+.top-search-box {
+  width: auto;
+  margin-left: 467px;
+}
+.search-filter-wrapper {
+  position: absolute;
+  top: 68px;
+  right: 20px;
+  .ant-btn-primary {
+    margin-left: 5px;
+    height: 26px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.global-search-wrapper {
+  .ant-select-selection__clear {
+    opacity: 1 !important;
+    right: 20px;
+    top: 18px;
+    background: transparent;
+    font-size: 16px;
+  }
+}
+.ant-select-dropdown-menu {
+  max-height: 800px !important;
+}
+
+// Dark theme related styles
+.dark-theme {
+  .app-root,
+  .global-layout {
+    min-height: 100vh !important;
+    height: auto !important;
+    background: #000;
+  }
+  .global-content,
+  body {
+    background-color: #000;
+  }
+
+  // .ag-theme-balham .ag-header {
+  //   background-color: #131313 !important;
+  //   color: rgba(255, 255, 255, 0.68) !important;
+  //   border-color: #434343 !important;
+  // }
+  // .ag-theme-balham,
+  // .ag-theme-balham .ag-row {
+  //   background-color: #131313 !important;
+  //   color: rgba(255, 255, 255, 0.68) !important;
+  // }
+  // .ag-theme-balham .ag-root,
+  // .ag-theme-balham .ag-header,
+  // .ag-theme-balham .ag-header-row,
+  // .ag-theme-balham .ag-paging-panel,
+  // .ag-theme-balham .ag-row {
+  //   border-color: #434343 !important;
+  // }
+  // .ag-theme-balham .ag-paging-panel {
+  //   color: rgba(255, 255, 255, 0.68) !important;
+  // }
+  // .ag-paging-page-summary-panel button {
+  //   background-color: #ccc !important;
+  // }
+
+  .ant-select-dropdown-menu-item {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.52) !important;
+  }
+
+  // .ag-theme-balham .ag-floating-filter-body input,
+  .ant-select-selection,
+  .ant-select-dropdown,
+  .ant-select-dropdown-menu-item-selected {
+    color: rgba(255, 255, 255, 1) !important;
+    background: #3c3c3c !important;
+    border-color: #434343 !important;
+    .ant-select-arrow {
+      color: #ccc !important;
+    }
+  }
+  .search-input-wrapper .search-input.ant-input-affix-wrapper .ant-input:not(:first-child) {
+    color: rgb(206, 206, 206) !important;
+    background: rgba(19, 19, 19, 0.85) !important;
+    border-color: #434343 !important;
+    font-weight: 200;
+    letter-spacing: 1.2px;
+  }
+  .search-input-wrapper {
+    .anticon {
+      color: rgb(130, 127, 127) !important;
+    }
+  }
+
+  .global-content.global-content-search {
+    background: #000 !important;
+  }
+  .search-results {
+    position: relative;
+    // padding: 0 20px;
+  }
+  // .ag-theme-balham .ag-overlay-loading-wrapper {
+  //   background-color: rgba(0, 0, 0, 0.7) !important;
+  //   .ant-spin-dot-item {
+  //     background-color: #fff;
+  //   }
+  // }
+
+  .search-select-options {
+    width: 100%;
+    .ant-select-selection {
+      color: #cecece !important;
+      background: rgba(19, 19, 19, 0.85) !important;
+      border-color: #434343 !important;
+    }
+    .ant-select-selection--single {
+      height: auto !important;
+    }
+    .ant-select-selection__rendered {
+      line-height: 53px;
+      font-size: 20px;
+      font-weight: 200;
+      letter-spacing: 1px;
+    }
+  }
+
+  .initial-search-done {
+    .search-select-options {
+      .ant-select-selection--single {
+        height: auto !important;
+      }
+      .ant-select-selection__rendered {
+        line-height: 38px;
+        font-size: 16px;
+        font-weight: 200;
+        letter-spacing: 1px;
+      }
+    }
+  }
+  .ant-select-selection,
+  .ant-select-dropdown,
+  .ant-select-dropdown-menu-item-selected,
+  .ant-select-dropdown-menu-item-active {
+    background: #6b6969 !important;
+  }
+
+  .search-input-wrapper {
+    transition: all 0.5s ease-out;
+    &.initial-search-done {
+      .anticon-search {
+        font-size: 18px;
+      }
+
+      .search-input {
+        height: 40px;
+        &.ant-input-affix-wrapper .ant-input:not(:first-child) {
+          padding-left: 35px;
+          font-size: 16px;
+        }
+        .ant-input-prefix {
+          left: 12px;
+        }
+        .anticon-search {
+          font-size: 18px;
+        }
+      }
+    }
+    .search-input {
+      height: 54px;
+      .ant-input-suffix {
+        cursor: pointer;
+      }
+      .anticon-search {
+        font-size: 22px;
+      }
+      &.ant-input-affix-wrapper .ant-input:not(:first-child) {
+        padding-left: 48px;
+        font-size: 22px;
+      }
+      .ant-input-prefix {
+        left: 17px;
+      }
+    }
+  }
+
+  .ant-input,
+  .ant-select-selection--single {
+    border-radius: 0 !important;
+  }
+
+  .search-info {
+    font-size: 12px;
+    color: rgba(214, 214, 214, 1);
+    position: relative;
+    top: 11px;
+    text-align: right;
+    font-weight: 600;
+    transition: 0.25s ease;
+    .loading {
+      color: rgba(214, 214, 214, 1);
+      margin-right: 10px;
+    }
+    &.loading {
+      color: rgba(214, 214, 214, 0.32);
+      transition: 0.25s ease;
+    }
+  }
+
+  .column-filter-dropdown {
+    min-width: 220px;
+    max-width: 800px;
+    width: auto !important;
+  }
+  .top-option-box {
+    float: left;
+    width: 456px;
+  }
+
+  .top-search-box {
+    width: auto;
+    margin-left: 467px;
+  }
+  .search-filter-wrapper {
+    position: absolute;
+    top: 68px;
+    right: 20px;
+    .ant-btn-primary {
+      margin-left: 5px;
+      height: 26px;
+      font-size: 11px;
+      line-height: 16px;
+    }
+  }
+  .ant-select-dropdown-menu-item {
+    &:hover:not(.ant-select-dropdown-menu-item-disabled) {
+      background: #6b6969 !important;
+    }
+  }
+
+  .ant-spin-dot-item {
+    background-color: #f1f1f1 !important;
+  }
+  .global-search-wrapper {
+    .ant-select-selection__clear {
+      opacity: 1 !important;
+      right: 20px;
+      top: 18px;
+      background: transparent;
+      font-size: 16px;
+    }
+  }
+  .ant-select-dropdown-menu {
+    max-height: 800px !important;
+  }
+}
