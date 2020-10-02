@@ -71,6 +71,7 @@ class SearchComponent extends Component {
     sortOrder: "",
     filters: {},
     reqTime: 0,
+    metaFields: [],
   };
 
   tableWrapperRef = React.createRef();
@@ -374,77 +375,20 @@ class SearchComponent extends Component {
   };
 
   createColDefs = () => {
-    const colDefs = [
-      {
-        title: this.renderTitleWithFilter("name", "Hostname"),
-        dataIndex: "name",
-        key: "name",
-        className: "name",
-        sorter: true,
-        width: 130,
-      },
-      {
-        title: this.renderTitleWithFilter("ip", "IP"),
-        dataIndex: "ip",
-        key: "ip",
-        className: "ip",
-        sorter: true,
-        width: 130,
-      },
-      {
-        title: this.renderTitleWithFilter("type", "Type"),
-        dataIndex: "type",
-        key: "type",
-        className: "type",
-        sorter: true,
-        width: 100,
-      },
-      {
-        title: this.renderTitleWithFilter("vendor", "Vendor"),
-        dataIndex: "vendor",
-        key: "vendor",
-        className: "vendor",
-        sorter: true,
-        width: 100,
-      },
-      {
-        title: this.renderTitleWithFilter("value", "Value"),
-        dataIndex: "value",
-        key: "value",
-        className: "value",
-        sorter: true,
-        render: (value) => <div className="wrap-single-line">{value}</div>,
-      },
-      {
-        title: this.renderTitleWithFilter("value_type", "Value Type"),
-        dataIndex: "value_type",
-        key: "value_type",
-        className: "value_type",
-        sorter: true,
-        width: 140,
-      },
-      {
-        title: this.renderTitleWithFilter("dn", "DN"),
-        dataIndex: "dn",
-        key: "dn",
-        className: "dn",
-        width: 240,
-        render: (dn) => {
-          if (dn && dn.length) {
-            return dn.join(", ");
-          }
-          return dn;
-        },
-      },
-      {
-        title: this.renderTitleWithFilter("country", "Country"),
-        dataIndex: "country",
-        key: "country",
-        className: "country",
-        sorter: true,
-        width: 120,
-      },
-    ];
+    const { metaFields } = this.state;
+    const colDefs = [];
+    metaFields.map((meta) => {
+      if (meta.isShow) {
+        colDefs.push({
+          title: this.renderTitleWithFilter(meta.name, meta.label),
+          dataIndex: meta.name,
+          key: meta.name,
+          className: meta.name,
+          sorter: true,
+          width: meta.width ? meta.width : 130,
+        });
+      }
+    });
     return colDefs;
   };
 
@@ -461,7 +405,7 @@ class SearchComponent extends Component {
       }
     });
 
-    this.setState({ filters }, () => {
+    this.setState({ filters, metaFields: meta.fields }, () => {
       const rowData = data.data.map((d, index) => {
         return {
           ...d,

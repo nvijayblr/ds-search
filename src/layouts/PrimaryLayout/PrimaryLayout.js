@@ -15,9 +15,9 @@ import "./PrimaryLayout.scss";
 const { Content } = Layout;
 
 class App extends Component {
-  state = {
-    isRolesLoaded: true,
-  };
+  // state = {
+  //   isRolesLoaded: true,
+  // };
 
   componentWillMount() {
     // if (!localStorage.getItem('roles-initiated')) {
@@ -43,17 +43,17 @@ class App extends Component {
     return (
       <Switch>
         {/* {<Route path="/search" component={DeviceSearchPage} />} */}
-        {<Route path="/search" component={DSMSearch} />}
+        {<Route exact path="/" component={DSMSearch} />}
         {/* {<Route path="/dsm-editor" component={DSMEditor} />}
         {<Route path="/dsm-viewer" component={DSMViewer} />} */}
-        {<Redirect to="/search" />}
+        <Route render={() => <Redirect to={{ pathname: "/" }} />} />
       </Switch>
     );
   };
 
   render() {
     const { location } = this.props;
-    const { isRolesLoaded } = this.state;
+    // const { isRolesLoaded } = this.state;
     const globalContentClasses = classNames("global-content", {
       "global-content-search": location.pathname === "/search",
       "global-content-devices": location.pathname === "/devices",
@@ -64,9 +64,7 @@ class App extends Component {
     return (
       <Layout className="global-layout">
         <GlobalHeader />
-        <Content className={globalContentClasses}>
-          <Switch>{isRolesLoaded ? this.routes() : ""}</Switch>
-        </Content>
+        <Content className={globalContentClasses}>{this.routes()}</Content>
       </Layout>
     );
   }

@@ -3,7 +3,7 @@ import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 // import moment from "moment";
 
 import { Provider } from "./context";
-import UnauthorizedLayout from "./layouts/UnauthorizedLayout/UnauthorizedLayout";
+// import UnauthorizedLayout from "./layouts/UnauthorizedLayout/UnauthorizedLayout";
 import PrimaryLayout from "./layouts/PrimaryLayout/PrimaryLayout";
 import "./App.scss";
 
@@ -25,9 +25,9 @@ class App extends React.Component {
     return (
       <Provider>
         <Switch>
-          <Route path="/public" component={UnauthorizedLayout} />
+          {/* <Route path="/public" component={UnauthorizedLayout} /> */}
           <PrivateRoute path="/" component={PrimaryLayout} />
-          <Redirect to="/search" />
+          <Redirect to="/" />
         </Switch>
       </Provider>
     );

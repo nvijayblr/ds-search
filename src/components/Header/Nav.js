@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint jsx-a11y/anchor-is-valid: [0] */
 import React, { Component } from "react";
-import { withRouter, matchPath, Link } from "react-router-dom";
+import { withRouter, matchPath } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Menu } from "antd";
 
@@ -113,9 +113,9 @@ class Nav extends Component {
               <Link to="/search">Search</Link>
             </Menu.Item>
           )} */}
-          <Menu.Item key="search">
-            <Link to="/search">Search</Link>
-          </Menu.Item>
+          {/* <Menu.Item key="/" className="active">
+            <Link to="/ds-search">Search</Link>
+          </Menu.Item> */}
           {/* <Menu.Item key="dsm-editor">
             <Link to="/dsm-editor">DSM Editor</Link>
           </Menu.Item>
