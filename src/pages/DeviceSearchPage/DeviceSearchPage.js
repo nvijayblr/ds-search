@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import DeviceSearchInput from '../../components/DeviceSearchInput/DeviceSearchInput';
-import DeviceSearchResults from '../../components/DeviceSearchResults/DeviceSearchResults';
+import React, { Fragment } from "react";
+import DeviceSearchInput from "../../components/DeviceSearchInput/DeviceSearchInput";
+import DeviceSearchResults from "../../components/DeviceSearchResults/DeviceSearchResults";
 
 function DeviceSearchPage() {
-  const hiddenColumns = ['status'];
+  const hiddenColumns = ["status"];
   return (
     <Fragment>
       <DeviceSearchInput />
