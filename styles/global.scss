@@ -4,6 +4,9 @@
 *:not(.ant-btn-circle).ant-switch {
   border-radius: 100px !important;
 }
+body {
+  font-family: "Alata" !important;
+}
 .ant-switch {
   background-color: rgba(140, 140, 140, 1);
   &.ant-switch-checked {
@@ -73,12 +76,12 @@
   .name {
     display: inline-block;
     vertical-align: middle;
-    font-family: "Montserrat", sans-serif;
     font-weight: 300;
     margin-left: 5px;
     position: relative;
     top: -3px;
     font-size: 20px;
+    font-family: "Alata";
   }
 }
 .tab-content {
