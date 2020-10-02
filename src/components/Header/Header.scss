@@ -2,13 +2,13 @@
   &.global-header {
     padding: 0 20px;
     display: flex;
-    background: #00519e;
+    background: #003349;
     &.ant-layout-header {
       height: 50px;
       line-height: 50px;
     }
     .ant-menu-dark {
-      background: #00519e;
+      background: #003349;
       .ant-menu-item {
         color: #fff;
       }
@@ -19,7 +19,7 @@
     }
     .ant-menu-dark .ant-menu-item-selected > a,
     .ant-menu-dark .ant-menu-item-selected > a:hover {
-      color: #00519e;
+      color: #003349;
     }
     .menu-dark .ant-menu-item > a {
       color: #fff;

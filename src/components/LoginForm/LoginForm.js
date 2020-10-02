@@ -1,18 +1,17 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Form, Icon, Input, Button, message } from 'antd';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Form, Icon, Input, Button } from "antd";
 
-import './LoginForm.scss';
-import { loginRequest, getRolesRequest } from '../../services/api';
+import "./LoginForm.scss";
 
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
   state = {
     isLoggingIn: false,
-    isShowPassword: false
+    isShowPassword: false,
   };
 
   usernameInput = React.createRef();
@@ -21,14 +20,16 @@ class LoginForm extends React.Component {
 
   componentWillMount = () => {
     const { history } = this.props;
-    const isDarkMode = JSON.parse(localStorage.getItem('dsm-dark-mode'));
+    const isDarkMode = JSON.parse(localStorage.getItem("dsm-dark-mode"));
     if (isDarkMode) {
-      document.querySelector('body').className = `${isDarkMode ? 'dark-theme' : 'light-theme'}`;
+      document.querySelector("body").className = `${
+        isDarkMode ? "dark-theme" : "light-theme"
+      }`;
     }
-    history.push('/dds-search');
+    history.push("/dds-search");
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     const { form } = this.props;
 
     e.preventDefault();
@@ -36,67 +37,9 @@ class LoginForm extends React.Component {
       if (!err) {
         this.login(values);
         this.setState({
-          isLoggingIn: true
+          isLoggingIn: true,
         });
       }
-    });
-  };
-
-  login = values => {
-    loginRequest(values)
-      .then(response => this.handleLoginSuccess(response))
-      .catch(error => this.handleLoginError(error.response));
-  };
-
-  handleLoginSuccess = response => {
-    localStorage.setItem('auth', JSON.stringify(response.data));
-    this.getRoles();
-  };
-
-  handleLoginError = error => {
-    const { form } = this.props;
-
-    this.setState({
-      isLoggingIn: false
-    });
-
-    if (!error) {
-      message.error('Cannot connect to server, please check the vpn.');
-      return;
-    }
-    if (error && error.data && error.data.error) {
-      message.error(error.data.error);
-      this.usernameInput.current.focus();
-    } else {
-      message.error('Unfortunately there was an error, please try again');
-      form.resetFields();
-    }
-  };
-
-  getRoles = () => {
-    getRolesRequest()
-      .then(response => this.handleGetRolesSuccess(response))
-      .catch(error => this.handleGetRolesError());
-  };
-
-  handleGetRolesSuccess = response => {
-    const { history } = this.props;
-
-    localStorage.setItem('roles', JSON.stringify(response.data));
-    localStorage.setItem('roles-initiated', true);
-
-    this.setState({
-      isLoggingIn: false
-    });
-
-    history.push('/dds-search');
-  };
-
-  handleGetRolesError = () => {
-    message.error('Unfortunately there was an error, please try again');
-
-    this.setState({
-      isLoggingIn: false
     });
   };
 
@@ -114,45 +57,54 @@ class LoginForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please enter your username!' }]
+          {getFieldDecorator("username", {
+            rules: [{ required: true, message: "Please enter your username!" }],
           })(
             <Input
               ref={this.usernameInput}
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
               placeholder="Username"
               autoFocus
             />
           )}
         </FormItem>
         <FormItem>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please enter your password!' }]
+          {getFieldDecorator("password", {
+            rules: [{ required: true, message: "Please enter your password!" }],
           })(
             <Input
               ref={this.passwordInput}
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               suffix={
                 <Icon
-                  type={isShowPassword ? 'eye' : 'eye-invisible'}
-                  title={isShowPassword ? 'Hide Password' : 'Show Password'}
+                  type={isShowPassword ? "eye" : "eye-invisible"}
+                  title={isShowPassword ? "Hide Password" : "Show Password"}
                   className="sh-password"
                   onClick={this.showHidePassword}
                 />
               }
-              type={isShowPassword ? 'text' : 'password'}
+              type={isShowPassword ? "text" : "password"}
               placeholder="Password"
             />
           )}
         </FormItem>
         <FormItem>
           {isLoggingIn && (
-            <Button type="primary" htmlType="submit" className="login-form-button" disabled>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              disabled
+            >
               <Icon type="sync" className="login-spinner-icon" spin />
             </Button>
           )}
           {!isLoggingIn && (
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
               Login
             </Button>
           )}
@@ -164,7 +116,7 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
   form: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(Form.create()(LoginForm));

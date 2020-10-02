@@ -2,15 +2,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint jsx-a11y/anchor-is-valid: [0] */
-import React, { Component } from 'react';
-import { withRouter, matchPath, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Menu } from 'antd';
+import React, { Component } from "react";
+import { withRouter, matchPath, Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Menu } from "antd";
 
-import './Nav.scss';
+import "./Nav.scss";
 
 class Nav extends Component {
-  state = { selectedMenuItem: '', isMobileNavExapnded: false };
+  state = { selectedMenuItem: "", isMobileNavExapnded: false };
 
   componentDidMount() {
     const { history } = this.props;
@@ -28,8 +28,8 @@ class Nav extends Component {
 
   setActiveMenuItem() {
     const match = matchPath(window.location.pathname, {
-      path: '/:section',
-      strict: false
+      path: "/:section",
+      strict: false,
     });
 
     if (match) {
@@ -37,37 +37,37 @@ class Nav extends Component {
     }
   }
 
-  getSelectedClass = menu => {
+  getSelectedClass = (menu) => {
     const { selectedMenuItem } = this.state;
-    return selectedMenuItem === menu ? 'selected' : '';
+    return selectedMenuItem === menu ? "selected" : "";
   };
 
-  expandCollapseNav = e => {
+  expandCollapseNav = (e) => {
     e.preventDefault();
     const { isMobileNavExapnded } = this.state;
     this.setState({ isMobileNavExapnded: !isMobileNavExapnded });
   };
 
-  signout = e => {
+  signout = (e) => {
     const { history } = this.props;
 
     e.preventDefault();
-    localStorage.removeItem('auth');
-    localStorage.removeItem('roles');
-    history.push('/public/login');
+    localStorage.removeItem("auth");
+    localStorage.removeItem("roles");
+    history.push("/public/login");
   };
 
   render() {
-    const { selectedMenuItem, isMobileNavExapnded } = this.state;
-    let roles = [];
+    const { selectedMenuItem } = this.state;
+    // let roles = [];
 
-    if (localStorage.getItem('roles')) {
-      roles = JSON.parse(localStorage.getItem('roles'));
-    }
+    // if (localStorage.getItem("roles")) {
+    //   roles = JSON.parse(localStorage.getItem("roles"));
+    // }
 
     return (
       <>
-        <div className="mobile-nav">
+        {/* <div className="mobile-nav">
           <div
             className={`nav-toggle ${isMobileNavExapnded ? 'expanded' : ''}`}
             onClick={e => {
@@ -85,7 +85,7 @@ class Nav extends Component {
             <ul>
               {roles.includes('search') && (
                 <li className={this.getSelectedClass('search')}>
-                  <Link to="/dsm-search">Search</Link>
+                  <Link to="/search">Search</Link>
                 </li>
               )}
               <li className="seperator">
@@ -105,7 +105,7 @@ class Nav extends Component {
               </li>
             </ul>
           </nav>
-        </div>
+        </div> */}
 
         <Menu selectedKeys={[selectedMenuItem]} mode="horizontal" theme="dark">
           {/* {roles.includes('search') && (
@@ -113,15 +113,15 @@ class Nav extends Component {
               <Link to="/search">Search</Link>
             </Menu.Item>
           )} */}
-          <Menu.Item key="dsm-search">
-            <Link to="/dsm-search">DSM Search</Link>
+          <Menu.Item key="search">
+            <Link to="/search">Search</Link>
           </Menu.Item>
-          <Menu.Item key="dsm-editor">
+          {/* <Menu.Item key="dsm-editor">
             <Link to="/dsm-editor">DSM Editor</Link>
           </Menu.Item>
           <Menu.Item key="dsm-viewer">
             <Link to="/dsm-viewer">DSM Viewer</Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </>
     );
@@ -129,7 +129,7 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(Nav);
