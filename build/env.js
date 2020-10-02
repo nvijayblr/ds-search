@@ -3,5 +3,5 @@
 // eslint-disable-next-line func-names
 (function(window) {
   window.__env = window.__env || {};
-  window.__env.apiDomain = "";
+  window.__env.apiDomain = "https://dsm-search.sdil.aorta.net/";
 })(this);
