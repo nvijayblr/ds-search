@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint jsx-a11y/anchor-is-valid: [0] */
 import React, { Component } from "react";
-import { withRouter, matchPath } from "react-router-dom";
+import { withRouter, matchPath, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Menu } from "antd";
 
@@ -108,11 +108,12 @@ class Nav extends Component {
         </div> */}
 
         <Menu selectedKeys={[selectedMenuItem]} mode="horizontal" theme="dark">
-          {/* {roles.includes('search') && (
-            <Menu.Item key="search">
-              <Link to="/search">Search</Link>
-            </Menu.Item>
-          )} */}
+          <Menu.Item key="search1">
+            <Link to="/search1">Search 1</Link>
+          </Menu.Item>
+          <Menu.Item key="search2">
+            <Link to="/search2">Search 2</Link>
+          </Menu.Item>
           {/* <Menu.Item key="/" className="active">
             <Link to="/ds-search">Search</Link>
           </Menu.Item> */}

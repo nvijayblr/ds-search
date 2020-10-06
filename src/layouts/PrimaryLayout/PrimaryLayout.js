@@ -7,8 +7,10 @@ import classNames from "classnames";
 import GlobalHeader from "../../components/Header/Header";
 // import DeviceSearchPage from '../../pages/DeviceSearchPage/DeviceSearchPage';
 // import DSMEditor from "../../components/DSM/DSMEditor/DSMEditor";
-import DSMSearch from "../../components/DSM/DSMSearch/DSMSearch";
+// import DSMSearch from "../../components/DSM/DSMSearch/DSMSearch";
 // import DSMViewer from "../../components/DSM/DSMViewer/DSMViewer";
+import DSMPage1 from "../../pages/DSMPages/DSMPage1";
+import DSMPage2 from "../../pages/DSMPages/DSMPage2";
 
 import "./PrimaryLayout.scss";
 
@@ -43,10 +45,10 @@ class App extends Component {
     return (
       <Switch>
         {/* {<Route path="/search" component={DeviceSearchPage} />} */}
-        {<Route exact path="/" component={DSMSearch} />}
-        {/* {<Route path="/dsm-editor" component={DSMEditor} />}
-        {<Route path="/dsm-viewer" component={DSMViewer} />} */}
-        <Route render={() => <Redirect to={{ pathname: "/" }} />} />
+        {<Route exact path="/search1" component={DSMPage1} />}
+        {<Route path="/search2" component={DSMPage2} />}
+        {/* {<Route path="/dsm-viewer" component={DSMViewer} />} */}
+        <Route render={() => <Redirect to={{ pathname: "/search1" }} />} />
       </Switch>
     );
   };
