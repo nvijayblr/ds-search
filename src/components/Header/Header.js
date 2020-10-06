@@ -13,7 +13,7 @@ function GlobalHeader() {
     <Header className="global-header">
       <a className="brand" href="/">
         {/* <div className="logo" /> */}
-        <span className="name">Melvin</span>
+        <span className="name">LambdaDB</span>
       </a>
       <Nav />
       <UserMenu />
